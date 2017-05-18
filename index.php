@@ -15,8 +15,9 @@ require_once ('api/src/book.php');
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Books</title>
-        <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    </head>
+        <link rel="stylesheet" href="css/style.css">
+        <!--<link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    --></head>
     <body>
         <div class="container">
 
@@ -64,19 +65,13 @@ require_once ('api/src/book.php');
                 </div>
             </div>
         
-        <div id="new">            
-        </div>
-            
         
-            <div id="app"></div>
-            
-            <?php   //lista książek
-            $loadAllBooks = Book::loadFromDB($conn);
-            foreach ($loadAllBooks as $value) {
-                echo "<a href='api/books.php?id=" . $value->getId() . "'> " . $value->getId() . ". " . $value->getName() . "</a><br>";
-            }
-            
-            ?>       
+         <button id="showBook" type="submit" class="btn btn-primary">Show all books</button>   
+
+     
+    <ul class="listBooks"></ul>
+           
+  
 
             <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
             <script src="api/src/app.js" type="text/javascript"></script>
