@@ -3,81 +3,74 @@ $(function () {
 
 
 
-//$("#showBook").click(function (event) {
 
-    $.ajax({type: 'GET', url: 'http://localhost/Books/api/books.php'})
-            .done(function (data) {
-                var obj = JSON.parse(data);
-                for (i = 0; i < obj.length; i++) {
-                    $('.listBooks').append("<li class='title' id='" + obj[i].id + "'>" + obj[i].name + "<div class='description hide' id='" + obj[i].id + "' >" + obj[i].description + "</div></li>");
-                }
-                ;
-            })
-            .fail(function () { })
-            .always(function () { });
-//});
+    // $("#showBook").click(function (event) {
 
+    $.ajax({type: 'GET',
+        url: 'http://localhost/Books/api/books.php',
+        success: function (data) {
+            var obj = JSON.parse(data);
+            for (i = 0; i < obj.length; i++) {
+                $('.listBooks').append("<li class='title' id='" + obj[i].id + "'>" + obj[i].name + "<div class='description hide' ></div></li>");
+                //  $('.listBooks').append("<li class='title' id='" + obj[i].id + "'>" + obj[i].name + "<div class='description hide' id='" + obj[i].id + "' >by " + obj[i].autor + "<br>" + obj[i].description + "</div></li>");
+            }
+            ;
+        },
+        error: function (xhr, status, errorThrown) {
+            alarm(status);
+        },
+        complete: function (xhr, status) {
+        }
 
+    })
 
-
+    /*   $(document).on('click', 'li', function (e) {
+     console.log(this);
+     var id = this.id;
+     $("#" + id + "").children("#" + id + "").toggle();
+     console.log(id);
+     }); */
 
     $(document).on('click', 'li', function (e) {
-        console.log(this);
         var id = this.id;
-        $("#" + id + "").children("#" + id + "").toggle();
-        console.log(id);
-    });
-
-
-
-
-
-    $("#Book").click(function (event) {
-        $.ajax({
-            url: 'api/books.php',
-            dataType: 'json',
-            type: 'post',
-            contentType: 'application/json',
-            data: JSON.stringify({"name": $('#name').val(), "last-name": $('#autor').val(), "description": $('#description').val()}),
-            processData: false,
-            success: function (data, textStatus, jQxhr) {
-                $('#app').html(JSON.stringify(data));
+        $.ajax({type: 'GET',
+            url: "http://localhost/Books/api/books.php?id=" + id + "",
+            success: function (data) {
+                var obj = JSON.parse(data);
+                des = 0;
+                if(des<1){
+                des = $("#"+id+"").children('div').append("by " + obj.autor + "<br>" + obj.description + "").toggleClass();
+                } else {
+                des.remove(); 
+                }
             },
+            error: function (xhr, status, errorThrown) {
+                alarm(status)
+            },
+            complete: function (xhr, status) {
+            }
 
-        });
-        event.preventDefault();
-
+        })
     });
 
+    //});
 
 
 
+
+    $("#sub").click(function (event) {
+        $.ajax({
+            url: 'http://localhost/Books/api/books.php',
+            type: 'post',
+            data: {"name": $('#name').val(), "autor": $('#autor').val(), "description": $('#description').val()},
+            success: function (data, textStatus, jQxhr) {
+                alert(textStatus);
+            },
+            error: function (xhr, status, errorThrown) {
+            },
+            complete: function (xhr, status) {
+            }
+        });
+    });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
- * $('input[type="submit"]').on('click', function (e) {
- var addUser = $('#addUser').val();
- var age = $('#age').val();
- 
- var li = $("<li data-age='" + age + "'>" + addUser + "</li>");
- li = colorizeLi(li);
- $('.main').append(li);
- 
- })
- */
