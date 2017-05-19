@@ -5,21 +5,18 @@ require_once ('src/book.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-    if (isset($_GET['id'])) {
+    if (isset($_GET['id'])) {  // single book
         $id = $_GET['id'];
         $loadBook = Book::loadBookById($conn, $id);
         echo json_encode($loadBook);
-     /*   echo " " . $loadBook->getId() . " <br>";
-        echo " " . $loadBook->getName() . " <br>";
-        echo " " . $loadBook->getAutor() . " <br>";
-        echo " " . $loadBook->getDescription() . " <br>"; */
+        
     } else {
-        $loadAllBooks = Book::loadFromDB($conn);
+        $loadAllBooks = Book::loadFromDB($conn);    // all books
         echo json_encode($loadAllBooks);
     }
-} else {
+} else if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-    if (isset($_POST['name']) && isset($_POST['autor']) && isset($_POST['description'])) {        // wpis nowy
+    if (isset($_POST['name']) || isset($_POST['autor']) || isset($_POST['description'])) {        // new book
         $book1 = new Book();
         $book1->setName($_POST['name']);
         $book1->setAutor($_POST['autor']);
@@ -27,6 +24,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $book1->Create($conn);
         $conn->close();
         $conn = null;
-        echo 'aaaa';
     }
 }

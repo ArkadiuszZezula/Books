@@ -37,7 +37,7 @@ require_once ('api/src/book.php');
         
         
     <button id="showBook" type="submit" class="btn btn-primary">Show all books</button>       
-    <ul class="listBooks"></ul>       
+    <div class="listBooks"></div>       
     <div id="app"></div>
   
 
