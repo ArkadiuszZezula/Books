@@ -38,24 +38,20 @@ else if ($_SERVER['REQUEST_METHOD'] == 'DELETE'){     // delete book
         $deleteBook = Book::loadBookById($conn, $id);
         $deleteBook->deleteFromDB($conn);
         $conn->close();
-        $conn = null; 
-        
+        $conn = null;        
 }
 
 
 else if ($_SERVER['REQUEST_METHOD'] == 'PUT'){     // edit book
      
         parse_str(file_get_contents("php://input"), $put_vars);
-        print_r($put_vars);
-        echo 'ok';
         
         $id = $put_vars['id'];
         $name = $put_vars['name'];
         $autor = $put_vars['autor'];
         $description = $put_vars['description'];
       
-        
-       $putBook = Book::loadBookById($conn, $id);
+        $putBook = Book::loadBookById($conn, $id);
         
         if(isset($put_vars['name'])){
             $putBook->setName($name);
@@ -69,10 +65,7 @@ else if ($_SERVER['REQUEST_METHOD'] == 'PUT'){     // edit book
         $putBook->setDescription($description);
         }
         
-        
         $putBook->update($conn);
         $conn->close();
         $conn = null; 
-      
-
 }
