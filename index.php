@@ -22,21 +22,29 @@ require_once ('api/src/book.php');
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     <form id="myForm" action="" method="POST" role="form">
-                        <legend>Books</legend>
+                        <legend><h1 align="center">Library</h1></legend>
                         <div class="form-group">
                             <label for="">Add new Book</label>
                             <input rows="4" cols="50" type="text" class="form-control" name="name" id="name"  placeholder="Title">
                             <input rows="4" cols="50" type="text" class="form-control" name="autor" id="autor" placeholder="Autor">
                             <input rows="4" cols="50" type="text" class="form-control" name="description" id="description" placeholder="Description" >
                         </div>
-                        <button id="sub" type="submit" class="btn btn-primary">Add</button>
+                        <button id="sub" type="submit" ">Add</button>
                     </form>
+                   <!-- <form class="putEdit" id="editForm" action="" method="PUT" role="form">
+                        
+                            <label for="">Edit Book</label>
+                            <input rows="4" cols="50" type="text" class="form-control" name="name" id="name"  placeholder="Title">
+                            <input rows="4" cols="50" type="text" class="form-control" name="autor" id="autor" placeholder="Autor">
+                            <input rows="4" cols="50" type="text" class="form-control" name="description" id="description" placeholder="Description" >
+                        </div>
+                        <button id="subEdit" type="submit" ">Edit</button>
+                    --></form>
                     <div id="result"></div>
                 </div>
             </div>
         
-        
-    <button id="showBook" type="submit" class="btn btn-primary">Show all books</button>       
+  
     <div class="listBooks"></div>       
     <div id="app"></div>
   
